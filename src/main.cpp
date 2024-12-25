@@ -3,13 +3,27 @@
 
 using namespace std;
 
+class SqrtExeption
+{
+
+    double number;
+
+public:
+    SqrtExeption(double _number) : number(_number) {}
+
+    string getMsg() const
+    {
+        return "Cant extract the square root from a negative number " + to_string(number);
+    }
+};
+
 double getSqrt(double n)
 {
     if (n >= 0)
     {
         return sqrt(n);
     }
-    throw string{"Cant extract the square root from a negative number " + to_string(n)};
+    throw SqrtExeption(n);
 }
 
 void test(double n)
@@ -18,9 +32,9 @@ void test(double n)
     {
         cout << getSqrt(n) << endl;
     }
-    catch (string &error_message)
+    catch (const SqrtExeption &ex)
     {
-        cout << error_message;
+        cout << ex.getMsg();
     }
 }
 
