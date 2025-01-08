@@ -13,7 +13,7 @@ protected:
     int age;
 
 public:
-    virtual void getInfo() const = 0;
+    virtual void get_info() const = 0;
     Passenger(pair<string, string> _name, int _age);
     virtual ~Passenger();
 };
@@ -25,7 +25,7 @@ class TicketPassenger : public Passenger
     string date;
 
 public:
-    void getInfo() const override;
+    void get_info() const override;
     TicketPassenger(pair<string, string> _name, int _age, string _date, double _ticket_price);
 };
 
@@ -34,21 +34,22 @@ class PreferencialPassenger : public Passenger
 {
     string range_of_access;
     string prefrencion_type;
+    double ticket_price;
 
 public:
-    void getInfo() const override;
-    PreferencialPassenger(pair<string, string> _name, int _age, string _pref_type, string _range);
+    void get_info() const override;
+    PreferencialPassenger(pair<string, string> _name, int _age, string _pref_type, string _range, double _ticket_price);
 };
 
 // Пассажир c проездным
 class MembershipPassenger : public Passenger
 {
-    string price;
+    double price;
     string type;
 
 public:
-    void getInfo() const override;
-    MembershipPassenger(pair<string, string> _name, int _age, string _price, string _type);
+    void get_info() const override;
+    MembershipPassenger(pair<string, string> _name, int _age, double _price, string _type);
 };
 
 // Пассажир без билета (заяц)
@@ -57,7 +58,7 @@ class FareDodgerPassenger : public Passenger
     bool is_wasted;
 
 public:
-    void getInfo() const override;
+    void get_info() const override;
     FareDodgerPassenger(pair<string, string> _name, int _age, bool _is_wasted);
 };
 
@@ -65,8 +66,8 @@ public:
 class PassengerList
 {
     Passenger **list;
-    size_t size;      // size of list
-    int freeslot = 0; // last passenger at list
+    size_t size;  // size of list
+    int back = 0; // last passenger at list
 
 public:
     PassengerList(size_t size);
@@ -80,5 +81,7 @@ public:
     }
 
     void pushback(Passenger *p);
+    void emplace(int index, Passenger *p);
     void erase(int index);
+    void get_info();
 };

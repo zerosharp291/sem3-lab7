@@ -8,5 +8,6 @@ project(lab7)
 
 add_executable(
     run
-    src/task1.cpp
+    src/task2.cpp
+    src/passenger.cpp
 )
