@@ -14,6 +14,7 @@ protected:
 
 public:
     virtual void get_info() const = 0;
+    virtual double get_ticket_price() = 0;
     Passenger(pair<string, string> _name, int _age);
     virtual ~Passenger();
 };
@@ -25,6 +26,7 @@ class TicketPassenger : public Passenger
     string date;
 
 public:
+    double get_ticket_price() override;
     void get_info() const override;
     TicketPassenger(pair<string, string> _name, int _age, string _date, double _ticket_price);
 };
@@ -38,6 +40,7 @@ class PreferencialPassenger : public Passenger
 
 public:
     void get_info() const override;
+    double get_ticket_price() override;
     PreferencialPassenger(pair<string, string> _name, int _age, string _pref_type, string _range, double _ticket_price);
 };
 
@@ -49,6 +52,7 @@ class MembershipPassenger : public Passenger
 
 public:
     void get_info() const override;
+    double get_ticket_price() override;
     MembershipPassenger(pair<string, string> _name, int _age, double _price, string _type);
 };
 
@@ -59,6 +63,7 @@ class FareDodgerPassenger : public Passenger
 
 public:
     void get_info() const override;
+    double get_ticket_price() override;
     FareDodgerPassenger(pair<string, string> _name, int _age, bool _is_wasted);
 };
 
@@ -84,4 +89,5 @@ public:
     void emplace(int index, Passenger *p);
     void erase(int index);
     void get_info();
+    int get_back();
 };

@@ -28,6 +28,11 @@ void TicketPassenger::get_info() const
     cout << endl;
 }
 
+double TicketPassenger::get_ticket_price()
+{
+    return ticket_price;
+}
+
 PreferencialPassenger::PreferencialPassenger(pair<string, string> _name, int _age, string _pref_type, string _range, double _ticket_price)
     : Passenger(_name, _age)
 {
@@ -50,6 +55,10 @@ void PreferencialPassenger::get_info() const
         cout << "-";
     cout << endl;
 }
+double PreferencialPassenger::get_ticket_price()
+{
+    return ticket_price;
+}
 
 MembershipPassenger::MembershipPassenger(pair<string, string> _name, int _age, double _price, string _type) : Passenger(_name, _age)
 {
@@ -70,6 +79,10 @@ void MembershipPassenger::get_info() const
         cout << "-";
     cout << endl;
 }
+double MembershipPassenger::get_ticket_price()
+{
+    return 0;
+}
 
 FareDodgerPassenger::FareDodgerPassenger(pair<string, string> _name, int _age, bool _is_wasted) : Passenger(_name, _age)
 {
@@ -87,6 +100,10 @@ void FareDodgerPassenger::get_info() const
     for (int i = 0; i < 15; i++)
         cout << "-";
     cout << endl;
+}
+double FareDodgerPassenger::get_ticket_price()
+{
+    return 0;
 }
 
 Passenger *PassengerList::operator[](size_t index)
@@ -171,4 +188,9 @@ void PassengerList::get_info()
                     break; */
         list[i]->get_info();
     }
+}
+
+int PassengerList::get_back()
+{
+    return back;
 }

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <typeinfo>
+#include <set>
 #include "passenger.h"
 
 using namespace std;
@@ -7,6 +9,22 @@ void get_spacebar()
 {
     for (int i = 0; i < 3; i++)
         cout << endl;
+}
+
+void get_conductor_info(PassengerList &list)
+{
+    set<string> types;
+    double sum = 0;
+    for (int i = 0; i < list.get_back(); i++)
+    {
+        Passenger *curr_passenger = list[i];
+        string curr_info = typeid(*curr_passenger).name();
+        types.emplace(curr_info);
+        sum += curr_passenger->get_ticket_price();
+    }
+
+    cout << "Different types of passengers: " << types.size() << endl;
+    cout << "Revenue of conductor: " << sum << endl;
 }
 
 int main()
@@ -44,6 +62,8 @@ int main()
 
     get_spacebar();
     l1.get_info();
+
+    get_conductor_info(l1);
 
     return 0;
 }
