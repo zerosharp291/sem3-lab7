@@ -1,4 +1,5 @@
 #include "../include/passenger.h"
+#include "../include/exception.h"
 #include <iostream>
 
 using namespace std;
@@ -109,9 +110,9 @@ double FareDodgerPassenger::get_ticket_price()
 Passenger *PassengerList::operator[](size_t index)
 {
     if (index >= size)
-        throw out_of_range("Out of range of passengers");
+        throw OutOfRangeException("Out of range of passengers");
     else if (index >= back)
-        throw "Passsenger does not exist";
+        throw PassengerNotFoundException("Passsenger does not exist");
     return list[index];
 }
 
@@ -137,7 +138,7 @@ void PassengerList::pushback(Passenger *p)
 {
     if (back == size)
     {
-        throw "Has no free slot!";
+        throw NoFreeSlotException("Has no free slot!");
     }
     else
     {
@@ -154,7 +155,7 @@ void PassengerList::emplace(int index, Passenger *p)
     }
     if (index < 0 || index > back)
     {
-        throw out_of_range("Index out of range");
+        throw OutOfRangeException("Index out of range");
     }
     for (int i = back; i > index; i--)
     {
@@ -168,7 +169,7 @@ void PassengerList::erase(int index)
 {
     if (list[index] == nullptr)
     {
-        throw "Passenger does not exist";
+        throw PassengerNotFoundException("Passenger does not exist");
     }
     else
     {
@@ -176,6 +177,7 @@ void PassengerList::erase(int index)
         {
             list[i] = list[i + 1];
         }
+        list[back - 1] = nullptr;
         back--;
     }
 }
